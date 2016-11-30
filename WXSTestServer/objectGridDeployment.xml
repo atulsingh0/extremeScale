@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<deploymentPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://ibm.com/ws/objectgrid/deploymentPolicy ../deploymentPolicy.xsd"
+ xmlns="http://ibm.com/ws/objectgrid/deploymentPolicy">
+
+    <objectgridDeployment objectgridName="TestGrid">
+        <mapSet name="mapSet" numberOfPartitions="13" minSyncReplicas="0" maxSyncReplicas="0" maxAsyncReplicas="1" replicaReadEnabled="false">
+            <map ref="DTES_Map"/>
+            <map ref=".*\.NONE\.P"/>
+            <map ref=".*\.NONE\.O"/>
+            <map ref=".*\.NONE\.N"/>
+            <map ref=".*\.LAT\.P"/>
+            <map ref=".*\.LAT\.O"/>
+            <map ref=".*\.LAT\.N"/>
+            <map ref=".*\.LUT\.P"/>
+            <map ref=".*\.LUT\.O"/>
+            <map ref=".*\.LUT\.N"/>
+            <map ref="APPOINTMENTS"/>
+         </mapSet>
+    </objectgridDeployment>
+</deploymentPolicy>
