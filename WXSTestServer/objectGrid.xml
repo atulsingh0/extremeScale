@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<objectGridConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://ibm.com/ws/objectgrid/config ../objectGrid.xsd"
+ xmlns="http://ibm.com/ws/objectgrid/config">
+
+  <objectGrids>
+    <objectGrid name="TestGrid" txTimeout="30" >
+    
+    	<backingMap
+            name="DTES_Map"
+            	ttlEvictorType="NONE"
+            	lockStrategy="OPTIMISTIC_NO_VERSIONING"
+				copyMode="COPY_TO_BYTES"
+				template="true"
+				pluginCollectionRef="DTES_Plugins" >
+        </backingMap>
+    
+	    <backingMap
+            name=".*\.NONE\.P"  
+            	ttlEvictorType="NONE"
+            	lockStrategy="PESSIMISTIC"
+				copyMode="COPY_TO_BYTES"
+				template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.NONE\.O"
+            	ttlEvictorType="NONE"
+            	lockStrategy="OPTIMISTIC"
+				copyMode="COPY_TO_BYTES"
+				template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.NONE\.N"
+            	ttlEvictorType="NONE"
+            	lockStrategy="NONE"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LAT\.P"
+            	ttlEvictorType="LAST_ACCESS_TIME"
+            	timeToLive="1800"
+            	lockStrategy="PESSIMISTIC"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LAT\.O"
+            	ttlEvictorType="LAST_ACCESS_TIME"
+            	timeToLive="1800"
+            	lockStrategy="OPTIMISTIC"
+				copyMode="COPY_TO_BYTES"
+				template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LAT\.N"
+            	ttlEvictorType="LAST_ACCESS_TIME"
+            	timeToLive="1800"
+            	lockStrategy="NONE"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LUT\.P"
+            	ttlEvictorType="LAST_UPDATE_TIME"
+            	timeToLive="1800"
+            	lockStrategy="PESSIMISTIC"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LUT\.O"
+            	ttlEvictorType="LAST_UPDATE_TIME"
+            	timeToLive="1800"
+            	lockStrategy="OPTIMISTIC"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap>
+        
+        <backingMap
+            name=".*\.LUT\.N"
+            	ttlEvictorType="LAST_UPDATE_TIME"
+            	timeToLive="1800"
+            	lockStrategy="NONE"
+			    copyMode="COPY_TO_BYTES"
+			    template="true" >
+        </backingMap> 
+        
+        <backingMap 
+            name="APPOINTMENTS" 
+            	lockStrategy="PESSIMISTIC" 
+            	copyMode="COPY_TO_BYTES" 
+            	pluginCollectionRef="APPOINTMENTS_Plugins" >
+        </backingMap> 
+        
+     <!-- We don't really want this Map or Loader running yet
+        <backingMap 
+            name="DTES" 
+            	lockStrategy="NONE" 
+            	copyMode="COPY_TO_BYTES" 
+            	pluginCollectionRef="DTES_Plugins" >
+        </backingMap>
+      -->
+                   
+    </objectGrid>
+  </objectGrids>
+  
+  <backingMapPluginCollections>
+  	<backingMapPluginCollection id="DTES_Plugins">
+        <bean id="Loader" className="us.gregreid.wxsdemo.DTESloader">
+        	<property name="dataSourceName" 
+                      type="java.lang.String" 
+                      value="jdbc/dtes" 
+                      description="datasource name" />
+        </bean>
+    </backingMapPluginCollection>
+    
+    <backingMapPluginCollection id="APPOINTMENTS_Plugins">
+        <bean id="MapIndexPlugin" className="com.ibm.websphere.objectgrid.plugins.index.HashIndex">
+            <property name="POJOKeyIndex" type="boolean" value="true" description="Index on POJO key, not the value" />
+            <property name="Name" type="java.lang.String" value="GetAppointments" description="By storeId, appointmentYYYYMM, and appointmentId" />
+            <property name="RangeIndex" type="boolean" value="false" description="true for MapRangeIndex" />
+            <property name="AttributeName" type="java.lang.String" value="storeId,appointmentYYYYMM,appointmentId" description="" />
+            <property name="FieldAccessAttribute" type="boolean" value="true" description="Read fields directly" />
+        </bean>
+        <bean id="MapIndexPlugin" className="com.ibm.websphere.objectgrid.plugins.index.HashIndex">
+            <property name="POJOKeyIndex" type="boolean" value="true" description="Index on POJO key, not the value" />
+            <property name="Name" type="java.lang.String" value="GetAppointments2" description="By storeId, appointmentYYYYMM" />
+            <property name="RangeIndex" type="boolean" value="false" description="true for MapRangeIndex" />
+            <property name="AttributeName" type="java.lang.String" value="storeId,appointmentYYYYMM" description="" />
+            <property name="FieldAccessAttribute" type="boolean" value="true" description="Read fields directly" />
+            <property name="GlobalIndexEnabled" type="boolean" value="true" description="true for global index" />
+        </bean>
+    </backingMapPluginCollection>
+    
+     	
+  </backingMapPluginCollections>
+
+</objectGridConfig>
