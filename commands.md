@@ -1,23 +1,25 @@
 ## Catalog Server 
 ### Start -> 
-startXsServer.bat csDINotify -listenerHost SE127864.saifg.rbc.com -listenerPort 9820
+startXsServer.bat csDINotify -listenerHost server.data.abc.com -listenerPort 9820
 
 ### Stop -> 
-stopXsServer csDINotify -catalogServiceEndPoints SE127864.saifg.rbc.com:9820
+stopXsServer csDINotify -catalogServiceEndPoints server.data.abc.com:9820
 
 ## Container Server
 ### Start-> 
-startXsServer con0DINotify -objectgridFile ..\csDINotify\Config\objectgrid.xml -deploymentPolicyFile ..\csDINotify\Config\deployment.xml -catalogServiceEndPoints SE127864.saifg.rbc.com:9820
+startXsServer con0DINotify -objectgridFile ..\csDINotify\Config\objectgrid.xml -deploymentPolicyFile ..\csDINotify\Config\deployment.xml -catalogServiceEndPoints server.data.abc.com:9820
 
 ### Stop -> 
-stopXsServer con0DINotify -catalogServiceEndPoints SE127864.saifg.rbc.com:9820
+stopXsServer con0DINotify -catalogServiceEndPoints server.data.abc.com:9820
 
 ### ADMIN Monitor Console (startConsoleServer.bat) Admin/Admin
 https://<server>:7443
 Register catalog servers: csDINotify
-Register catalag servers into catalog service domain: SE127864.saifg.rbc.com
+Register catalag servers into catalog service domain: server.data.abc.com
+
 
 --ObjectGrid.xml--
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 	This sample program is provided AS IS and may be used, executed, copied and modified
@@ -49,7 +51,9 @@ Register catalag servers into catalog service domain: SE127864.saifg.rbc.com
   
 </objectGridConfig>
 
+
 --Deployment.xml--
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
 	This sample program is provided AS IS and may be used, executed, copied and modified
