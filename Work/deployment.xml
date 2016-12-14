@@ -10,37 +10,15 @@
 	5724-J34 (C) COPYRIGHT International Business Machines Corp. 2012
 -->
 
-<objectGridConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://ibm.com/ws/objectgrid/config ../objectGrid.xsd"
- xmlns="http://ibm.com/ws/objectgrid/config">
+<deploymentPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://ibm.com/ws/objectgrid/deploymentPolicy ../deploymentPolicy.xsd"
+ xmlns="http://ibm.com/ws/objectgrid/deploymentPolicy">
 
-  <objectGrids>
-    <objectGrid name="AtulGrid" txTimeout="30">
-    
-      <backingMap name="Order" copyMode="COPY_TO_BYTES" 
-      		 />
-      		
-      <backingMap name="Customer" copyMode="COPY_TO_BYTES" 
-      		 />
-			
-			
-		<querySchema>
-         <mapSchemas>
-           <mapSchema
-             mapName="Order"
-             valueClass="OrderBean"
- 			 primaryKeyField="keys"
-             accessType="FIELD"/>
-			 <mapSchema
-             mapName="Customer"
-             valueClass="CustomerBean"
-             primaryKeyField="keys"
-             accessType="FIELD"/>
-         </mapSchemas>
-         
-      </querySchema>
-		
-    </objectGrid>
-  </objectGrids>
-  
-</objectGridConfig>
+    <objectgridDeployment objectgridName="AtulGrid">
+        <mapSet name="mapSet" numberOfPartitions="13" minSyncReplicas="0" maxSyncReplicas="1" >
+            <map ref="Customer"/>
+            <map ref="Order"/>
+        </mapSet>
+    </objectgridDeployment>
+
+</deploymentPolicy>
