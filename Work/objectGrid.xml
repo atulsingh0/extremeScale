@@ -23,6 +23,9 @@
          <mapSchemas>  <mapSchema  mapName="Order" valueClass="OrderBean" primaryKeyField="keys" accessType="FIELD"/>
 		        <mapSchema mapName="Customer" valueClass="CustomerBean" primaryKeyField="keys" accessType="FIELD"/>
          </mapSchemas>
+	 <relationships>
+         <relationship source="OrderBean" target="CustomerBean" relationField="customerId" />
+         </relationships>
          
     </querySchema>
 		
