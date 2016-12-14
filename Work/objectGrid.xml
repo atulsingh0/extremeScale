@@ -14,33 +14,19 @@
  xsi:schemaLocation="http://ibm.com/ws/objectgrid/config ../objectGrid.xsd"
  xmlns="http://ibm.com/ws/objectgrid/config">
 
-  <objectGrids>
+<objectGrids>
     <objectGrid name="AtulGrid" txTimeout="30">
-    
-      <backingMap name="Order" copyMode="COPY_TO_BYTES" 
-      		 />
-      		
-      <backingMap name="Customer" copyMode="COPY_TO_BYTES" 
-      		 />
+    <backingMap name="Order" copyMode="COPY_TO_BYTES" />
+    <backingMap name="Customer" copyMode="COPY_TO_BYTES" />
 			
-			
-		<querySchema>
-         <mapSchemas>
-           <mapSchema
-             mapName="Order"
-             valueClass="OrderBean"
- 			 primaryKeyField="keys"
-             accessType="FIELD"/>
-			 <mapSchema
-             mapName="Customer"
-             valueClass="CustomerBean"
-             primaryKeyField="keys"
-             accessType="FIELD"/>
+    <querySchema>
+         <mapSchemas>  <mapSchema  mapName="Order" valueClass="OrderBean" primaryKeyField="keys" accessType="FIELD"/>
+		        <mapSchema mapName="Customer" valueClass="CustomerBean" primaryKeyField="keys" accessType="FIELD"/>
          </mapSchemas>
          
-      </querySchema>
+    </querySchema>
 		
     </objectGrid>
-  </objectGrids>
+</objectGrids>
   
 </objectGridConfig>
