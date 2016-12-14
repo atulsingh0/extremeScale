@@ -44,8 +44,9 @@ public class Application
         CustomerBeanKeys ck = new CustomerBeanKeys();
         // posting data into Customer map
         ck.id = "15";;
+	ck.firstName =  "El_15";   
         c.id = ck.id;
-        c.firstName = "El_15";
+        c.firstName = ck.firstName;
         c.surname = c.firstName;
         c.address = c.firstName+" Address";
         c.phoneNumber = ck.id+ck.id;
