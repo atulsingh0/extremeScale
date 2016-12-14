@@ -59,15 +59,7 @@ public class Application
         		s.begin();
 
         		OrderBean res = new OrderBean();
-//       		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p WHERE p.keys.orderNumber='96'");
-//        		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p WHERE p.orderNumber='96'");
-//        		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p WHERE p.orderNumber='15'");
         		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p, Customer c WHERE p.orderNumber = c.id");
-
-//        		query.setParameter(1, "13");
-//        		query.setParameter(new OrderBeanKeys().setOrderNumber("96"), res);
-//        		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p WHERE p.quantity=12");
-//        		ObjectQuery query = s.createObjectQuery("SELECT p FROM Order p WHERE p.itemName='Data'");        		
         		query.setPartition(i);
         		Iterator result2 = query.getResultIterator();
         		while (result2.hasNext()){
